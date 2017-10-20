@@ -16,20 +16,19 @@
 			VContextMenusBody
 		},
 		data () {
-			return {
-				showMenu: true
-			}
+			return { }
 		},
 		computed: {
 			menus () {
 				return store.state.contextmenu.data
+			},
+
+			showMenu() {
+				return store.state.contextmenu.show
 			}
 		},
 		watch: {
 			menus (val, old) {
-
-				// 显示菜单 DOM
-				this.showMenu = true
 
 				// 数据变化时自动关闭所有二级菜单
 				this.$refs.contextmenu.hideOpenMenu('all')
@@ -111,9 +110,13 @@
 				formatData( obj )
 				
 				// 通知 vuex
-				store.commit('formatContextmenu', {
-					state: newPosition,
-					inner: obj
+				store.commit('setContextmenu', {
+					show: true,
+					data: {
+						state: newPosition,
+						inner: obj
+					},
+					evt: null
 				})
 			},
 
@@ -124,7 +127,7 @@
 				let target = e.target
 
 				if (( el !== target) && !el.contains(target)) {
-					this.showMenu = false
+					store.commit('setContextmenu', {show: false})
 					// 调用子组件关闭菜单所有的打开状态
 					this.$refs.contextmenu.hideOpenMenu('all')
 				}
@@ -142,7 +145,3 @@
 
 	}
 </script>
-
-<style lang="scss" scoped>
-
-</style>

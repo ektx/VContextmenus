@@ -219,6 +219,7 @@
 		.separator {
 			margin: 2px 0;
 			border-bottom: 2px solid #eee;
+			pointer-events: none;
 		}
 	}
 }	

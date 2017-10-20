@@ -14,6 +14,8 @@
 {
 	state: {
 		contextmenus: {
+			// 状态
+			show: true
 			// 数据
 			data: {},
 			// 事件
@@ -23,13 +25,10 @@
 	mutaions: {
 		// 设置方法
 		setContextmenu (state, data) {
-			state.contextmenu = data
-		},
-
-		// 格式化后返回数据
-		formatContextmenu (state, data) {
-			state.contextmenu = {
-				data, evt: null
+			if (Object.keys(data).length > 1) {
+				state.contextmenu = data
+			} else {
+				state.contextmenu.show = data.show
 			}
 		}
 	}
@@ -50,9 +49,10 @@
 </template>
 
 <script>
+	// 引入 store
 	import store from '../assets/js/store'
 	// 引入
-	import VContextmenus from '../components/VContextmenus/index'
+	import VContextmenus from '../components/VContextmenus'
 
 	export default {
 		components: {
@@ -65,6 +65,7 @@
 			}
 		},
 		methods: {
+			// 自定义事件
 			rightClick (evt) {
 				store.commit('setContextmenu', {
 					data: this.menu, evt
@@ -74,6 +75,17 @@
 	}
 </script>
 ``` 
+
+## 事件方法
+
+* store.commit('setContextmenu', {data, evt})
+
+@data 菜单内容
+@evt 鼠标事件
+
+展示菜单功能
+
+* 
 
 ## 完整示例
 
