@@ -6,9 +6,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
-		layerMod: {
-			status: false
-		},
 
 		// 右键菜单
 		contextmenu: {
@@ -22,10 +19,6 @@ export default new Vuex.Store({
 	},
 
 	mutations: {
-		// 显示隐藏弹层
-		setLayerStatus (state, data) {
-			state.layerMod = data
-		},
 
 		// 设置方法
 		setContextmenu (state, data) {
