@@ -56,7 +56,7 @@ yarn add v-contextmenus
 	// 引入 store
 	import store from '../assets/js/store'
 	// 引入
-	import VContextmenus from '../components/VContextmenus'
+	import VContextmenus from 'v-contextmenus'
 
 	export default {
 		components: {
