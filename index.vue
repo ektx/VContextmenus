@@ -7,7 +7,7 @@
 
 <script>
 	
-	import store from '../../assets/js/store'
+	import store from '../../src/assets/js/store'
 	import VContextMenusBody from './body'
 
 	export default {

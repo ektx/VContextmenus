@@ -35,7 +35,7 @@
 </template>
 
 <script>
-	import store from '../../assets/js/store'
+	import store from '../../src/assets/js/store'
 
 	export default {
 		name: 'v-contextmenus-body',
