@@ -4,7 +4,11 @@
 
 ## 使用方式
 
-1. 复制此组件到你的 components 文件夹下
+1. 安装
+
+```shell
+yarn add v-contextmenus
+```
 
 2. 在 vues 的 state 中添加共享状态与方法
 
