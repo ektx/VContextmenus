@@ -88,8 +88,10 @@ yarn add v-contextmenus
 @evt 鼠标事件
 
 展示菜单功能
+						
+* store.commit('setContextmenu', { show: false })
 
-* 
+关闭菜单
 
 ## 完整示例
 
