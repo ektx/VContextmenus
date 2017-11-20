@@ -114,8 +114,8 @@ const store = new Vuex.Store({
 
 > store.commit('setContextmenu', {data, evt})
 
-@data 菜单内容
-@evt 鼠标事件
+@data {object} 菜单内容   
+@evt {event} 鼠标事件   
 
 
 * 关闭菜单
