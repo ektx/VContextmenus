@@ -7,8 +7,9 @@
 
 <script>
 	
-	import store from '../../src/assets/js/store'
 	import VContextMenusBody from './body'
+
+	let store = {};
 
 	export default {
 		name: 'v-contextmenus',
@@ -20,7 +21,7 @@
 		},
 		computed: {
 			menus () {
-				return store.state.contextmenu.data
+				return this.$store.state.contextmenu.data
 			},
 
 			showMenu() {
@@ -29,10 +30,8 @@
 		},
 		watch: {
 			menus (val, old) {
-
 				// 数据变化时自动关闭所有二级菜单
 				this.$refs.contextmenu.hideOpenMenu('all')
-
 				// 在 vuex 中如果有数据和鼠标事件的情况下我们格式化数据
 				if (store.state.contextmenu.evt) 
 					this.show(val, store.state.contextmenu.evt)
@@ -136,8 +135,19 @@
 
 
 		},
+		beforeCreate () {
+
+			store = this.$store
+
+			this.$set(store.state, 'contextmenu', {
+				show: true,
+				data: {},
+				evt: null
+			})
+
+		},
 		created () {
-			document.addEventListener('click', this.documentClick)
+			document.addEventListener('click', this.documentClick);
 		},
 		destroyed () {
 			document.removeEventListener('click', this.documentClick)

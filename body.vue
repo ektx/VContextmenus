@@ -35,7 +35,8 @@
 </template>
 
 <script>
-	import store from '../../src/assets/js/store'
+
+	let store = {}
 
 	export default {
 		name: 'v-contextmenus-body',
@@ -45,6 +46,9 @@
 				openMenu: null,
 				lazyShow: null
 			}
+		},
+		beforeCreate () {
+			store = this.$store
 		},
 		methods: {
 			/*
@@ -175,17 +179,17 @@
 		top: 100px;
 		left: 100px;
 		padding: 5px 0;
-		font-size: 12px;
+		font-size: 1rem;
 		text-align: left;
-		line-height: 1.5rem;
+		line-height: 1.8rem;
 		white-space: nowrap;
 		background: rgba(255, 255, 255, .9);
 		border-radius: 3px;
 		box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+		z-index: 1000
 	}
 	
 	li {
-		cursor: pointer;
 		user-select: none;
 
 		&:hover {
@@ -194,6 +198,7 @@
 
 		div {
 			padding: 0 15px 0 10px;
+			cursor: pointer;
 
 			i {
 				float: right;
@@ -213,6 +218,7 @@
 
 		.noEvt {
 			color: #aaa;
+			cursor: default;
 			pointer-events: none;
 		}
 

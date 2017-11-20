@@ -15,28 +15,20 @@ yarn add v-contextmenus
 > 请先确保你有使用 vuex
 
 ```javascript
-{
-	state: {
-		contextmenus: {
-			// 状态
-			show: true
-			// 数据
-			data: {},
-			// 事件
-			evt: null
-		}
-	},
-	mutaions: {
-		// 设置方法
+const store = new Vuex.Store({
+	state: {},
+	// 添加以下内容
+	mutations: {
 		setContextmenu (state, data) {
 			if (Object.keys(data).length > 1) {
 				state.contextmenu = data
 			} else {
 				state.contextmenu.show = data.show
 			}
+
 		}
 	}
-}
+})
 ```
 
 3. 在页面中调用组件
@@ -47,14 +39,12 @@ yarn add v-contextmenus
 		<!-- 绑定事件 -->
 		<div @contextmenu.prevent="rightClick"></div>
 
-		<!-- 引用 -->
+		<!-- 引用 HTML 结构 -->
 		<VContextmenus></VContextmenus>
 	</main>
 </template>
 
 <script>
-	// 引入 store
-	import store from '../assets/js/store'
 	// 引入
 	import VContextmenus from 'v-contextmenus'
 
@@ -65,7 +55,45 @@ yarn add v-contextmenus
 		data () {
 			return {
 				// 菜单内容
-				menu: [ ... ]
+				menu: {
+					data: [
+						{
+							title: 'v-contenxtmenus',
+							evt: function(data) {
+
+								alert('Welcome Use v-contenxtmenus!')
+								
+							}
+						},
+						{
+							title: '联系方式',
+							children: [
+								{
+									title: 'ektx1989@gmail.com'
+								},
+								{
+									title: '@宅龙猫'
+								}
+							]
+						},
+						{
+							type: 'separator'
+						},
+						{
+							title: 'Github.com',
+							evt: function() {
+
+							}
+						},
+						{
+							type: 'separator'
+						},
+						{
+							disabled: true,
+							title: 'v 0.1.0'
+						}
+					]
+				}
 			}
 		},
 		methods: {
@@ -82,17 +110,15 @@ yarn add v-contextmenus
 
 ## 事件方法
 
-* store.commit('setContextmenu', {data, evt})
+* 展示菜单功能
+
+> store.commit('setContextmenu', {data, evt})
 
 @data 菜单内容
 @evt 鼠标事件
 
-展示菜单功能
-						
-* store.commit('setContextmenu', { show: false })
 
-关闭菜单
+* 关闭菜单
 
-## 完整示例
+> store.commit('setContextmenu', { show: false })
 
-将 demo 文件放到你的 vue webpack 项目中,替换其下的 src
