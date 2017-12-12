@@ -4,6 +4,7 @@
 		<template v-if="menus.state && menus.state.show">
 		<ul 
 			v-show="menus.state.show"
+			:class="browser" 
 			:style="{
 				top: menus.state.position.top +'px',
 				left: menus.state.position.left +'px'
@@ -36,19 +37,15 @@
 
 <script>
 
-	let store = {}
-
 	export default {
 		name: 'v-contextmenus-body',
 		props: ['menus'],
 		data () {
 			return {
+				browser: '',
 				openMenu: null,
 				lazyShow: null
 			}
-		},
-		beforeCreate () {
-			store = this.$store
 		},
 		methods: {
 			/*
@@ -167,7 +164,14 @@
 				}
 
 			}
-		} // end methods
+		},  // end methods,
+		mounted: function () {
+			// 对于 safari 浏览器添加特殊的样式效果
+			// backdrop-filter
+			if ('safari' in window) {
+				this.browser = 'safari'
+			}
+		}
 	}
 </script>
 
@@ -183,18 +187,19 @@
 		text-align: left;
 		line-height: 1.8rem;
 		white-space: nowrap;
-		background: rgba(255, 255, 255, .9);
+		background: rgba(255, 255, 255, 1);
 		border-radius: 3px;
-		box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
-		z-index: 1000
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+		z-index: 1000;
+
+		&.safari {
+			background: rgba(255, 255, 255, .75);
+			backdrop-filter: blur(5px) saturate(180%);
+		}
 	}
 	
 	li {
 		user-select: none;
-
-		&:hover {
-			background: #eee;
-		}
 
 		div {
 			padding: 0 15px 0 10px;
@@ -220,6 +225,15 @@
 			color: #aaa;
 			cursor: default;
 			pointer-events: none;
+		}
+
+		&:hover {
+			background: #539BFF;
+			color: #fff;
+
+			& .noEvt {
+				color: rgba(255, 255, 255, .5);
+			}
 		}
 
 		.separator {
