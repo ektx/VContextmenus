@@ -11,7 +11,7 @@
 
 			}"
 		>
-			<li v-for="(data, index) in menus.inner">
+			<li v-for="(data, index) in menus.inner" :key="index">
 				<div 
 					v-if="'title' in data" 
 					:key="index" 
